@@ -1,11 +1,24 @@
 spring:
   application:
     name: eureka-client2
-server:
-  port: 8889
+  profiles:
+    active: node2
 eureka:
   client:
     serviceUrl:
       defaultZone: http://localhost:8762/eureka/
   instance:
     instanceId: ${spring.application.name}:${vcap.application.instance_id:${spring.application.instance_id:${random.value}}}
+    preferIpAddress: true
+
+---
+server:
+  port: 7777
+spring:
+  profiles: node1
+
+---
+server:
+  port: 6666
+spring:
+  profiles: node2
