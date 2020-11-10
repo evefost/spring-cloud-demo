@@ -8,6 +8,7 @@
         <module>eureka</module>
         <module>eureka-client</module>
         <module>eureka-client2</module>
+        <module>gateway</module>
     </modules>
     <parent>
         <groupId>org.springframework.boot</groupId>
