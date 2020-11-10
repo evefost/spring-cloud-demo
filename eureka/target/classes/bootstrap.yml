@@ -3,11 +3,11 @@ spring:
   application:
     name: eureka
   profiles:
-    active: peer3
+    active: peer2
 eureka:
   client:
     serviceUrl:
-      defaultZone: https://localhost:8761/eureka/,http://localhost:8762/eureka/,http://localhost:8763/eureka/
+      defaultZone: http://localhost:8761/eureka/,http://localhost:8762/eureka/
 
 ---
 server:
