@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.web.embedded.undertow.UndertowBuilderCustomizer;
+import org.springframework.cloud.client.discovery.DiscoveryClient;
 import org.springframework.cloud.client.loadbalancer.LoadBalanced;
 import org.springframework.cloud.netflix.eureka.EnableEurekaClient;
 import org.springframework.cloud.netflix.eureka.EurekaInstanceConfigBean;
@@ -68,16 +69,8 @@ public class Client1 {
     };
   }
 
-//  @Bean
-//  EmbeddedServletContainerCustomizer myEmbeddedServletContainerCustomizer(UndertowBuilderCustomizer customizer){
-//    return new EmbeddedServletContainerCustomizer(){
-//      @Override
-//      public void customize(ConfigurableEmbeddedServletContainer container) {
-//        if(container instanceof  UndertowEmbeddedServletContainerFactory){
-//          ((UndertowEmbeddedServletContainerFactory) container).addBuilderCustomizers(customizer);
-//        }
-//      }
-//    };
-//  }
+
+
+
 
 }
