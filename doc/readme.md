@@ -7,6 +7,8 @@ https://docs.spring.io/
     1.服务端依赖配置
     2.启动过程
         EurekaServerAutoConfiguration
+        EurekaServerInitializerConfiguration
+        EurekaServerBootstrap
         
     3.注册信息同步
 

@@ -7,4 +7,6 @@ EurekaBootStrap --> DiscoveryClient:
 EurekaBootStrap --> EurekaBootStrap:getPeerEurekaNodes() 初始化eureka服务端节点信息
 DiscoveryClient --> DiscoveryClient:register() 注册当前服务到注册中心
 DiscoveryClient --> DiscoveryClient:initScheduledTasks()初始化定时任务\n(创建定时刷新服务列任务、创建心跳定时任务)
+DiscoveryClient --> EurekaServer:通过http向服务端发送注册信息
+addInstance
 @enduml
