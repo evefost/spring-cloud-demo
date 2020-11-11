@@ -3,7 +3,7 @@ spring:
   application:
     name: eureka
   profiles:
-    active: peer1
+    active: peer2
 eureka:
   client:
     serviceUrl:

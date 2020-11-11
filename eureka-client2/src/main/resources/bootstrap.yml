@@ -2,7 +2,7 @@ spring:
   application:
     name: eureka-client2
   profiles:
-    active: node1
+    active: node2
 eureka:
   client:
     serviceUrl:

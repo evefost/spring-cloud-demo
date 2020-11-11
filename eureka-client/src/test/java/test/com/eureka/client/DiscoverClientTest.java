@@ -5,7 +5,6 @@ import com.netflix.appinfo.InstanceInfo;
 import com.netflix.discovery.EurekaClient;
 import com.netflix.discovery.shared.Application;
 import com.netflix.eureka.client.MyEurekaClient;
-import com.netflix.eureka.client.RandomLoadBalancerClient;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cloud.client.ServiceInstance;
@@ -20,8 +19,7 @@ public class DiscoverClientTest extends BaseTest{
     @Autowired
     private MyEurekaClient myEurekaClient;
 
-    @Autowired
-    private RandomLoadBalancerClient balancerClient;
+
 
     @Test
     public void getApplication(){

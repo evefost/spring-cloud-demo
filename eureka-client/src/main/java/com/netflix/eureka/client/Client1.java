@@ -43,16 +43,12 @@ public class Client1 {
     SpringApplication.run(Client1.class, args);
   }
 
-  @Bean
-  @LoadBalanced
-  RestTemplate restTemplate(){
-    return new RestTemplate();
-  }
 
-  @Bean
-  MyEurekaClient myEurekaClient(EurekaClientConfig clientConfig){
-    return new MyEurekaClient(clientConfig);
-  }
+
+//  @Bean
+//  MyEurekaClient myEurekaClient(EurekaClientConfig clientConfig){
+//    return new MyEurekaClient(clientConfig);
+//  }
   @Bean
   UndertowBuilderCustomizer builderCustomizer(){
     return new UndertowBuilderCustomizer() {
