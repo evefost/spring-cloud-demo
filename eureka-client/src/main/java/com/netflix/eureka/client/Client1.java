@@ -1,5 +1,6 @@
 package com.netflix.eureka.client;
 
+import com.netflix.discovery.EurekaClientConfig;
 import io.undertow.Undertow;
 import io.undertow.UndertowOptions;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,6 +9,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.web.embedded.undertow.UndertowBuilderCustomizer;
 import org.springframework.cloud.client.loadbalancer.LoadBalanced;
 import org.springframework.cloud.netflix.eureka.EnableEurekaClient;
+import org.springframework.cloud.netflix.eureka.EurekaInstanceConfigBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -28,6 +30,8 @@ public class Client1 {
   @Autowired
   private RestTemplate restTemplate;
 
+
+
   @RequestMapping("/")
   public String home() throws InterruptedException {
     Thread.sleep(500L);
@@ -44,7 +48,10 @@ public class Client1 {
     return new RestTemplate();
   }
 
-
+  @Bean
+  MyEurekaClient myEurekaClient(EurekaClientConfig clientConfig){
+    return new MyEurekaClient(clientConfig);
+  }
   @Bean
   UndertowBuilderCustomizer builderCustomizer(){
     return new UndertowBuilderCustomizer() {

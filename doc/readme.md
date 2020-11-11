@@ -10,7 +10,7 @@ https://docs.spring.io/
         EurekaServerInitializerConfiguration
         EurekaServerBootstrap
         
-    3.注册信息同步
+    3.注册信息同步到其它节点
 
 
 ##eureka 客户端
@@ -19,3 +19,4 @@ https://docs.spring.io/
         EurekaClientConfigBean
         EurekaBootStrap 
         com.netflix.discovery.DiscoveryClient
+AbstractJerseyEurekaHttpClient implement EurekaHttpClient
