@@ -16,8 +16,8 @@ public class DiscoverClientTest extends BaseTest{
     @Autowired
     private EurekaClient lookupService;
 
-    @Autowired
-    private MyEurekaClient myEurekaClient;
+//    @Autowired
+//    private MyEurekaClient myEurekaClient;
 
 
 
@@ -34,12 +34,12 @@ public class DiscoverClientTest extends BaseTest{
 
     @Test
     public void getApplicationByMyClient(){
-        Application application = myEurekaClient.getApplication("eureka-client2");
-        assert application != null;
-        List<InstanceInfo> instances = application.getInstances();
-        for(InstanceInfo instanceInfo:instances){
-            System.out.println("实例信息:"+instanceInfo.getIPAddr()+":"+instanceInfo.getPort());
-        }
+//        Application application = myEurekaClient.getApplication("eureka-client2");
+//        assert application != null;
+//        List<InstanceInfo> instances = application.getInstances();
+//        for(InstanceInfo instanceInfo:instances){
+//            System.out.println("实例信息:"+instanceInfo.getIPAddr()+":"+instanceInfo.getPort());
+//        }
     }
 
 

@@ -24,7 +24,7 @@ import java.util.Map;
 
 
 @SpringBootApplication
-//@EnableEurekaClient
+@EnableEurekaClient
 @RestController
 public class Client1 {
 
