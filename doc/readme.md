@@ -27,3 +27,11 @@
         2.5 启动服务列表刷新定时任务
         
 ## ribbon 
+    ribbon 初始化,ribbon以为服和名称为维度，给分个被调用的创建一个ApplicationContext;
+    每个context 相对独立
+    1.配置
+    2.初始化
+    3.负载选择过程
+## hystrix 
+    
+    

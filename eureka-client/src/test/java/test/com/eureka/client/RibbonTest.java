@@ -41,7 +41,7 @@ public class RibbonTest extends BaseTest{
     public void testLoadBalancer() throws InterruptedException {
         while (true){
             try {
-                ILoadBalancer loadBalancer = factory.getLoadBalancer("eureka-client2");
+                ILoadBalancer loadBalancer = factory.getLoadBalancer("eureka-client3");
                 Server server = loadBalancer.chooseServer(null);
                 System.out.println(server.getId());
             }catch (Exception e){

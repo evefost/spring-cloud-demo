@@ -1,0 +1,9 @@
+@startuml
+main -> SpringClientFactory:getLoadBalancer()\n获取某个服务的loadbalancer
+SpringClientFactory -> SpringClientFactory:getInstance()获取ILoadBalancer的实现
+main<-SpringClientFactory
+main->ZoneAwareLoadBalancer:chooseServer()选择一个实例，如果配置了多区域机房则优化选择同机房的实例
+ZoneAwareLoadBalancer->ZoneAvoidanceRule:choose
+ZoneAvoidanceRule -> CompositePredicate: chooseRoundRobinAfterFiltering()通过过滤掉部分server,\n再选择
+CompositePredicate-> CompositePredicate: getEligibleServers
+@enduml

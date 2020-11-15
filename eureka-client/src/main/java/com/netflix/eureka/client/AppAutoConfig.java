@@ -1,10 +1,8 @@
 package com.netflix.eureka.client;
 
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
-import org.springframework.cloud.client.discovery.DiscoveryClient;
 import org.springframework.cloud.client.loadbalancer.LoadBalanced;
 import org.springframework.cloud.client.loadbalancer.LoadBalancerClient;
-import org.springframework.cloud.netflix.ribbon.RibbonLoadBalancerClient;
 import org.springframework.cloud.netflix.ribbon.SpringClientFactory;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -26,12 +24,12 @@ public class AppAutoConfig {
         return new RestTemplate();
     }
 
-    @Primary
-    @Bean
-    @ConditionalOnMissingBean(LoadBalancerClient.class)
-    public GrayLoadBalancerClient loadBalancerClient(SpringClientFactory springClientFactory) {
-        return new GrayLoadBalancerClient(springClientFactory);
-    }
+//    @Primary
+//    @Bean
+//    @ConditionalOnMissingBean(LoadBalancerClient.class)
+//    public GrayLoadBalancerClient loadBalancerClient(SpringClientFactory springClientFactory) {
+//        return new GrayLoadBalancerClient(springClientFactory);
+//    }
 
 
 
