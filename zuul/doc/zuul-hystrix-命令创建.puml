@@ -1,0 +1,21 @@
+@startuml
+RibbonRoutingFilter->HttpClientRibbonCommandFactory:create()命令工厂准备创建 ribbon hystrix 命令
+HttpClientRibbonCommandFactory->HttpClientRibbonCommandFactory:getFallbackProvider()\n如果没配置fallback，则返回null\n请求出错就直接炸了
+HttpClientRibbonCommandFactory->SpringClientFactory:getClient()获取ribbon client
+HttpClientRibbonCommandFactory->SpringClientFactory:getLoadBalancer()获取负载均衡器
+HttpClientRibbonCommandFactory->HttpClientRibbonCommand:construct() 创建 HttpClientRibbonCommand
+HttpClientRibbonCommandFactory -->HttpClientRibbonCommand:super()
+HttpClientRibbonCommand -->HttpClientRibbonCommand:getSetter()
+HttpClientRibbonCommand -->HttpClientRibbonCommand:createSetter()
+HttpClientRibbonCommand -->HttpClientRibbonCommand:getHystrixTimeout()计算超时时间
+HttpClientRibbonCommand -->HttpClientRibbonCommand:getRibbonTimeout()
+HttpClientRibbonCommand -->HttpClientRibbonCommand:初始化隔离策略
+HttpClientRibbonCommand -->HttpClientRibbonCommand:initCommandProperties()初始化命令属性
+HttpClientRibbonCommand -->HttpClientRibbonCommand:initThreadPoolKey()初始化线程池key(以服务名称或自己重写)
+HttpClientRibbonCommand -->HttpClientRibbonCommand:initMetrics()以commandKey(serviceId)维度创建测量器
+HttpClientRibbonCommand -->HttpClientRibbonCommand:initCircuitBreaker()初始化熔断器
+HttpClientRibbonCommand -->HttpClientRibbonCommand:initThreadPool()以服务的维度创建线程池
+HttpClientRibbonCommand -->HttpClientRibbonCommand:initExecutionHook()拆行勾子
+RibbonRoutingFilter->HttpClientRibbonCommand:execute()执行hystrix命令
+RibbonRoutingFilter<-HttpClientRibbonCommand:setResponse()
+@enduml

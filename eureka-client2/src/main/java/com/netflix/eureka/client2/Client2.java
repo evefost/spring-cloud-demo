@@ -16,7 +16,8 @@ public class Client2 {
   private String port;
 
   @RequestMapping("/")
-  public String home() {
+  public String home() throws InterruptedException {
+    Thread.sleep(4010);
     return "Hello World client2"+port;
   }
 

@@ -1,0 +1,27 @@
+@startuml
+client -> DispatcherServlet
+DispatcherServlet ->DispatcherServlet:doDispatch
+DispatcherServlet ->DispatcherServlet:getHandler
+DispatcherServlet ->ZuulHandlerMapping:getHandler
+ZuulHandlerMapping ->ZuulHandlerMapping:getHandlerInternal
+ZuulHandlerMapping ->ZuulHandlerMapping:lookupHandler()查找处理器，如果没查到返回null,\n会走其它mapping处理
+ZuulHandlerMapping ->ZuulHandlerMapping:getHandlerExecutionChain
+DispatcherServlet ->HandlerExecutionChain:getHandler
+DispatcherServlet->DispatcherServlet:getHandlerAdapter
+DispatcherServlet->SimpleControllerHandlerAdapter:handle
+SimpleControllerHandlerAdapter->ZuulController:handleRequest
+ZuulController->ZuulController:handleRequestInternal
+ZuulController->ZuulServlet:service
+ZuulServlet->ZuulServlet:preRoute
+ZuulServlet->ZuulRunner:preRoute
+ZuulRunner->PreDecorationFilter:run() 据routeLocator处理要路由把那个serviceId
+ZuulServlet->ZuulServlet:route
+ZuulServlet->ZuulRunner:route
+ZuulRunner->RibbonRoutingFilter:run()进入ribbon route filter
+RibbonRoutingFilter->RibbonRoutingFilter:buildCommandContext()构建command context
+RibbonRoutingFilter->RibbonRoutingFilter:forward()开始构建命令
+RibbonRoutingFilter->HttpClientRibbonCommandFactory:create()命令工厂准备创建 ribbon hystrix 命令
+RibbonRoutingFilter->HttpClientRibbonCommand:execute()执行hystrix命令
+RibbonRoutingFilter->RibbonRoutingFilter:setResponse()设置响应信息
+ZuulServlet->ZuulServlet:postRoute()
+@enduml

@@ -1,0 +1,15 @@
+@startuml
+Application -> ZuulProxyAutoConfiguration:run
+ZuulProxyAutoConfiguration --> ZuulProxyAutoConfiguration:zuulServlet() 注入zuulServlet
+Application -> HttpClientRibbonConfiguration:ribbonCommandFactory()ribbon hystrix命令工厂\n默认使用httpclient,可选择配置其它客户端
+ZuulProxyAutoConfiguration->ZuulProxyAutoConfiguration:serviceRouteMapper() 注入ServiceRouteMapper一个实现，\n作用可以做服务名称转换
+ZuulProxyAutoConfiguration->ZuulProxyAutoConfiguration:discoveryRouteLocator()注入动态服务发现路由器
+ZuulProxyAutoConfiguration->ZuulProxyAutoConfiguration:preDecorationFilter()用于判断如何路由
+ZuulProxyAutoConfiguration->ZuulProxyAutoConfiguration:ribbonRoutingFilter() ribbon 命令建filter
+ZuulProxyAutoConfiguration->ZuulProxyAutoConfiguration:simpleHostRoutingFilter()处理静态主机代码转发
+ZuulProxyAutoConfiguration->ZuulProxyAutoConfiguration:sendResponseFilter()处理响应结果filter
+ZuulProxyAutoConfiguration->ZuulProxyAutoConfiguration:SendErrorFilter() 处理请求失败filter
+ZuulProxyAutoConfiguration->ZuulProxyAutoConfiguration:sendForwardFilter()转发filter
+ZuulProxyAutoConfiguration->ZuulProxyAutoConfiguration:zuulController()
+ZuulProxyAutoConfiguration->ZuulProxyAutoConfiguration:zuulHandlerMapping()
+@enduml

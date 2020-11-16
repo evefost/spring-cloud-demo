@@ -25,7 +25,7 @@ public class MultiThreadCommandTest {
      */
     @Test
     public void testThreadWithFixTime() throws InterruptedException {
-        TestResult execute = MultiThreadTestUtils.execute(100, 1000, 100000, 50, new Runnable() {
+        TestResult execute = MultiThreadTestUtils.execute(100, 1000, 100000, 30, new Runnable() {
             @Override
             public void run() {
                 Object result = buildCommand(HystrixCommandProperties.ExecutionIsolationStrategy.THREAD,1000,false).execute();
@@ -36,6 +36,11 @@ public class MultiThreadCommandTest {
         assert execute.getThrowableList().size() == 0;
     }
 
+    /**
+     * 模拟随机时间和执行失败
+     * 观察 hystrix 表现
+     * @throws InterruptedException
+     */
     @Test
     public void testThreadWithRandomTimeAndException() throws InterruptedException {
         TestResult execute = MultiThreadTestUtils.execute(100, 1000, 100000, 25, new Runnable() {
@@ -81,7 +86,7 @@ public class MultiThreadCommandTest {
                         .withMaximumSize(25))
                 .andCommandPropertiesDefaults(HystrixCommandProperties.Setter()
                         .withMetricsRollingStatisticalWindowInMilliseconds(60000)
-                        .withExecutionTimeoutInMilliseconds(1000)
+                        .withExecutionTimeoutInMilliseconds(1010)
                         .withCircuitBreakerSleepWindowInMilliseconds(2000)
                         .withCircuitBreakerErrorThresholdPercentage(50)
                         .withCircuitBreakerRequestVolumeThreshold(5)

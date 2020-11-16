@@ -1,0 +1,21 @@
+@startuml
+main --> HystrixCommand:execute() 执行hystrix命令
+HystrixCommand--> HystrixCommand:queue()
+HystrixCommand--> HystrixCommand:toObservable()创建可观察对象
+HystrixCommand--> HystrixCommand:terminateCommandCleanup 命令完成action
+HystrixCommand--> HystrixCommand:unsubscribeCommandCleanup 命令取消action
+HystrixCommand--> HystrixCommand:applyHystrixSemantics 创建 hystrix func
+HystrixCommand-->Observable:defer() 开始执行一第系例动作
+HystrixCommand-->HystrixCommand:applyHystrixSemantics()
+HystrixCommand -->HystrixCircuitBreaker:allowRequest()判断是否处理熔断
+HystrixCommand -->HystrixCommand:handleShortCircuitViaFallback()请求处理熔断,走降级回调
+HystrixCommand --> HystrixCommand:getExecutionSemaphore()获取判断是信号量还是线程池(默认)
+HystrixCommand--> HystrixCommand:executeCommandAndObserve 执行并观察
+HystrixCommand--> HystrixCommand:handleFallback 创建 fallback action 执行失败该fallback被执行
+HystrixCommand--> HystrixCommand:execution 创建执行可观察对象
+HystrixCommand--> HystrixCommand:executeCommandWithSpecifiedIsolation 执行指定隔离方式的命令
+HystrixCommand--> Observable: onNext()
+HystrixCommand--> HystrixCommand: getUserExecutionObservable() 开始真接执行命令的地方\n接下来就是调用ribbon
+HystrixCommand--> HystrixCommand: run()
+main<-HystrixCommand
+@enduml

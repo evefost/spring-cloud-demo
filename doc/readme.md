@@ -31,6 +31,9 @@
     每个context 相对独立
     DiscoveryEnabledNIWSServerList
     1.配置
+        ribbon.ReadTimeout=1000
+        eureka-client2.ribbon.ReadTimeout=1000
+        ribbon.ConnectTimeout=1000
     2.初始化
     3.负载选择过程
 ## hystrix 
