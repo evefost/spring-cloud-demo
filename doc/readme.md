@@ -27,7 +27,7 @@
         2.5 启动服务列表刷新定时任务
         
 ## ribbon 
-    ribbon 初始化,ribbon以为服和名称为维度，给分个被调用的创建一个ApplicationContext;
+    ribbon 初始化,ribbon以为服务名称为维度，给分个被调用服务的创建一个独立ApplicationContext，去管理负载器的信息
     每个context 相对独立
     DiscoveryEnabledNIWSServerList
     1.配置
