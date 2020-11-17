@@ -22,6 +22,9 @@ RibbonRoutingFilter->RibbonRoutingFilter:buildCommandContext()构建command cont
 RibbonRoutingFilter->RibbonRoutingFilter:forward()开始构建命令
 RibbonRoutingFilter->HttpClientRibbonCommandFactory:create()命令工厂准备创建 ribbon hystrix 命令
 RibbonRoutingFilter->HttpClientRibbonCommand:execute()执行hystrix命令
+HttpClientRibbonCommand->HttpClientRibbonCommand:run()
+HttpClientRibbonCommand->RibbonLoadBalancingHttpClient:executeWithLoadBalancer()这基本是ribbon的操作了
+HttpClientRibbonCommand->RibbonLoadBalancingHttpClient:execute()设置请求超时等信息，并调用httpClient
 RibbonRoutingFilter->RibbonRoutingFilter:setResponse()设置响应信息
 ZuulServlet->ZuulServlet:postRoute()
 @enduml
