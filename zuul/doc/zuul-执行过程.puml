@@ -1,20 +1,22 @@
 @startuml
 client -> DispatcherServlet
 DispatcherServlet ->DispatcherServlet:doDispatch
-DispatcherServlet ->DispatcherServlet:getHandler
+DispatcherServlet ->DispatcherServlet:getHandler()如果没有配置到合适的地址(404)\n将返回ResourceHttpRequestHandler
 DispatcherServlet ->ZuulHandlerMapping:getHandler
-ZuulHandlerMapping ->ZuulHandlerMapping:getHandlerInternal
-ZuulHandlerMapping ->ZuulHandlerMapping:lookupHandler()查找处理器，如果没查到返回null,\n会走其它mapping处理
+ZuulHandlerMapping ->ZuulHandlerMapping:getHandlerInternal()获取请求path
+ZuulHandlerMapping ->ZuulHandlerMapping:lookupHandler()处理忽略的服务\n,通过path配置对应的handler，如果没查到返回null,\n会走其它mapping处理
 ZuulHandlerMapping ->ZuulHandlerMapping:getHandlerExecutionChain
 DispatcherServlet ->HandlerExecutionChain:getHandler
 DispatcherServlet->DispatcherServlet:getHandlerAdapter
 DispatcherServlet->SimpleControllerHandlerAdapter:handle
 SimpleControllerHandlerAdapter->ZuulController:handleRequest
 ZuulController->ZuulController:handleRequestInternal
-ZuulController->ZuulServlet:service
+ZuulController->ZuulServlet:service()执行zuul servlet
 ZuulServlet->ZuulServlet:preRoute
 ZuulServlet->ZuulRunner:preRoute
 ZuulRunner->PreDecorationFilter:run() 据routeLocator处理要路由把那个serviceId
+PreDecorationFilter->CompositeRouteLocator:getMatchingRoute()遍列所有RouteLocator，\n配置到对应的路由(Route)
+CompositeRouteLocator->ZuulServlet:
 ZuulServlet->ZuulServlet:route
 ZuulServlet->ZuulRunner:route
 ZuulRunner->RibbonRoutingFilter:run()进入ribbon route filter
@@ -25,6 +27,11 @@ RibbonRoutingFilter->HttpClientRibbonCommand:execute()执行hystrix命令
 HttpClientRibbonCommand->HttpClientRibbonCommand:run()
 HttpClientRibbonCommand->RibbonLoadBalancingHttpClient:executeWithLoadBalancer()这基本是ribbon的操作了
 HttpClientRibbonCommand->RibbonLoadBalancingHttpClient:execute()设置请求超时等信息，并调用httpClient
+RibbonLoadBalancingHttpClient->InternalHttpClient:doExecute
+InternalHttpClient->MainClientExec:execute()
+MainClientExec->HttpClientConnectionManager:requestConnection()从httpclient连接池里获取一个连接
+MainClientExec->HttpRequestExecutor:execute()执行请求
+RibbonRoutingFilter<-HttpRequestExecutor:返回执行结果
 RibbonRoutingFilter->RibbonRoutingFilter:setResponse()设置响应信息
 ZuulServlet->ZuulServlet:postRoute()
 @enduml

@@ -11,5 +11,5 @@ ZuulProxyAutoConfiguration->ZuulProxyAutoConfiguration:sendResponseFilter()处�
 ZuulProxyAutoConfiguration->ZuulProxyAutoConfiguration:SendErrorFilter() 处理请求失败filter
 ZuulProxyAutoConfiguration->ZuulProxyAutoConfiguration:sendForwardFilter()转发filter
 ZuulProxyAutoConfiguration->ZuulProxyAutoConfiguration:zuulController()
-ZuulProxyAutoConfiguration->ZuulProxyAutoConfiguration:zuulHandlerMapping()
+ZuulProxyAutoConfiguration->ZuulProxyAutoConfiguration:zuulHandlerMapping() 创建HandlerMapping
 @enduml
